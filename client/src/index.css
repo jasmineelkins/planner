@@ -1,13 +1,449 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "PrintClearly";
+  src: local("PrintClearly"),
+    url(./fonts/PrintClearly-GGP.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "TimeBurner";
+  src: local("TimeBurner"), url(./fonts/Timeburner-xJB8.ttf) format("truetype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: TimeBurner, Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url("./images/18.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.item1 {
+  grid-area: header;
+}
+
+.item2 {
+  grid-area: tasks;
+}
+
+.item3 {
+  grid-area: calendar;
+}
+
+.item4 {
+  grid-area: notes;
+}
+
+.item5 {
+  grid-area: timer;
+}
+
+.item6 {
+  grid-area: heatmap;
+}
+
+.item7 {
+  grid-area: tips;
+}
+
+.item8 {
+  grid-area: google-cal;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    ". header ."
+    "google-cal google-cal google-cal"
+    "tasks tasks tips"
+    "tasks tasks calendar"
+    "tasks tasks calendar"
+    "notes notes timer"
+    "notes notes timer"
+    "notes notes ."
+    "heatmap heatmap heatmap";
+  gap: 10px;
+}
+
+#taskListContainerContainer,
+.tipsContainer,
+.calendarContainer,
+.notesContainer,
+.timeTrackerContainer,
+.heatmapContainer,
+.googleCalendarContainer,
+Header {
+  border: 1px solid yellow;
+  border-radius: 25px;
+  box-shadow: 0 0 2px yellow, 0 0 3px yellow;
+  padding: 20px;
+}
+
+input {
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 18px;
+  font-family: TimeBurner;
+  background-color: rgb(248, 236, 233);
+}
+
+input::placeholder {
+  font-style: italic;
+}
+
+/* BUTTONS ------------------------------------------------------------------------- */
+
+.btn {
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 14px;
+  font-family: TimeBurner;
+  background-color: #f9e7d7;
+}
+
+.btn a {
+  color: rgb(138, 85, 94);
+}
+
+.btn.link,
+.btn.return {
+  width: 50px;
+  margin: 2px;
+}
+
+.btn.link:hover,
+.btn.return:hover {
+  background-color: #f0e88d;
+}
+
+.btn.start:hover,
+.btn.resume:hover,
+.btn.pause:hover,
+.btn.save:hover,
+.btn.reset:hover,
+.btn.submit:hover,
+.btn.random-tip:hover {
+  background-color: rgb(165, 152, 152);
+}
+
+.btn.submit {
+  width: 80px;
+}
+
+.btn.reset:disabled {
+  pointer-events: none;
+}
+
+.btn.start,
+.btn.resume {
+  background-color: rgb(216, 240, 179);
+}
+
+.btn.pause {
+  background-color: rgb(240, 160, 146);
+}
+
+.btn.save {
+  background-color: rgb(187, 141, 170);
+}
+
+/* HEADER ----------------------------------------------------------------------------- */
+Header {
+  font-size: 50px;
+  color: rgb(121, 46, 75);
+  text-align: center;
+  padding: 30px;
+  background-color: rgba(250, 231, 224, 0.7);
+  /* text-transform: uppercase; */
+}
+
+/* TO DO LIST ----------------------------------------------------------------------------- */
+#taskListContainerContainer {
+  background-color: rgba(211, 165, 157, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.newTaskFormContainer {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  background-color: #ab9092;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 0 3px yellow;
+}
+
+.newTaskForm {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  display: flex;
+  width: 100%;
+}
+
+.newTaskForm input {
+  width: 40%;
+}
+
+.task {
+  background-color: rgb(208, 177, 177);
+  color: #333;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 2px;
+  border: 1px solid #333;
+  box-shadow: 0 0 3px yellow;
+}
+
+.taskName {
+  min-width: 120px;
+  text-align: left;
+}
+
+#selectList,
+#priority {
+  background-color: rgb(247, 212, 201);
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: TimeBurner;
+  /* font-size: 16px;
+  font-weight: bold; */
+}
+
+.taskName.completed {
+  text-decoration: line-through;
+  font-style: italic;
+  color: rgb(94, 92, 92);
+  font-weight: normal;
+}
+
+.deleteButton {
+  background-color: rgb(208, 177, 177);
+  border: none;
+  color: rgb(250, 234, 228);
+}
+
+.deleteButton:hover {
+  color: tomato;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* create custom checkbox appearance */
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  padding: 6px;
+
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 1.5px solid rgb(250, 234, 228);
+  border-radius: 6px;
+  background-color: rgb(250, 234, 228);
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: rgb(145, 39, 94);
+}
+
+input[type="checkbox"]:focus {
+  outline: none !important;
+}
+
+/* TIP OF THE DAY ------------------------------------------------------------------------- */
+.tipsContainer {
+  background-color: rgb(217, 194, 211, 0.7);
+  color: #333;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  /* width: 75%; */
+}
+
+.innerTipContainer {
+  background-color: #f9e9f4;
+  border: 1px solid yellow;
+  padding: 20px;
+  border-radius: 15px;
+  width: 75%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* CALENDAR -----------------------------------------------------------------------------  */
+.calendarContainer {
+  margin: 20px;
+  /* border: 2px solid green; */
+  background-color: rgb(186, 143, 158, 0.7);
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  width: 75%;
+}
+
+.innerCalendarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-range {
+  color: #333;
+  font-style: italic;
+  text-align: center;
+}
+
+/* GOOGLE CALENDAR -----------------------------------------------------------------------  */
+.googleCalendarContainer {
+  background-color: rgb(186, 143, 158, 0.7);
+  /* background-color: none; */
+  width: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.googleCalendar {
+  border-radius: 25px;
+}
+
+/* NOTES -----------------------------------------------------------------------------  */
+.notesContainer {
+  background-color: rgb(242, 207, 185, 0.7);
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  flex-direction: row;
+  color: rgb(72, 51, 51);
+}
+
+.notesOutputContainer {
+  background-color: #f9e8d7;
+  border: 1px solid yellow;
+  border-radius: 15px;
+  height: 75%;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+/* TIME TRACKER --------------------------------------------------------------------------- */
+.timeTrackerContainer {
+  background-color: rgb(230, 194, 194, 0.7);
+  display: flex;
+  flex-direction: column;
+  color: rgb(99, 52, 99);
+  max-width: 400px;
+}
+
+.timedActivityOutputContainer {
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  margin-top: 10px;
+  font-size: 18px;
+  padding: 20px;
+}
+
+.timedActivity {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* HEATMAP ----------------------------------------------------------------- */
+.heatmapContainer {
+  background-color: rgb(237, 214, 210, 0.7);
+}
+.react-calendar-heatmap .color-scale-1 {
+  fill: #f70808;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #f75b07e2;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #ffa200;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #ffc505;
+}
+.react-calendar-heatmap .color-scale-5 {
+  fill: #d9fa01d4;
+}
+.react-calendar-heatmap .color-scale-6 {
+  fill: #68bd1e;
+}
+.react-calendar-heatmap .color-scale-7 {
+  fill: #0a410d;
+}
+
+/* MEDIA QUERIES ----------------------------------------------------------------- */
+@media only screen and (max-width: 900px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header"
+      "tasks"
+      "calendar"
+      "timer"
+      "notes"
+      "heatmap";
+    gap: 10px;
+  }
+
+  .notesOutputContainer {
+    height: 50%;
+  }
+}
+
+/* MAXIMIZED COMPONENTS (ROUTES) -------------------------------------------------- */
+.gridContainer.maximized {
+  display: block;
+  width: 100%;
 }

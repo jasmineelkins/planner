@@ -8,6 +8,7 @@ import TimeTracker from "./components/TimeTracker";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GoogleCalendar from "./components/GoogleCalendar";
 import DailyQuote from "./components/DailyQuote";
+import Footer from "./components/Footer";
 
 function App() {
   const [taskList, setTaskList] = useState([]);
@@ -33,77 +34,86 @@ function App() {
   }
 
   return (
-    <div>
-      <Header />
+    <div className="pageContainer">
+      <div className="contentWrap">
+        <Header />
 
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="App gridContainer">
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div className="App gridContainer">
+                  <TaskListContainer
+                    setCompletedTasks={setCompletedTasks}
+                    taskList={taskList}
+                    setTaskList={setTaskList}
+                    addNewTaskToList={addNewTaskToList}
+                    setNotesDisplay={setNotesDisplay}
+                    completedDate={completedDate}
+                    completedTasks={completedTasks}
+                  />
+                  <DailyQuote />
+                  <CalendarComponent
+                    setCompletedDate={setCompletedDate}
+                    completedDate={completedDate}
+                  />
+                  <Notes
+                    notesDisplay={notesDisplay}
+                    updateNotes={updateNotes}
+                  />
+                  <TimeTracker />
+                  <Heatmap completedTasks={completedTasks} />
+                </div>
+              }
+            ></Route>
+
+            <Route
+              path="task-list"
+              element={
                 <TaskListContainer
-                  setCompletedTasks={setCompletedTasks}
                   taskList={taskList}
                   setTaskList={setTaskList}
                   addNewTaskToList={addNewTaskToList}
                   setNotesDisplay={setNotesDisplay}
                   completedDate={completedDate}
-                  completedTasks={completedTasks}
+                  setCompletedTasks={setCompletedTasks}
                 />
-                <DailyQuote />
-                <CalendarComponent
-                  setCompletedDate={setCompletedDate}
+              }
+            ></Route>
+
+            <Route
+              path="calendar"
+              element={
+                <CalendarComponent setCompletedDate={setCompletedDate} />
+              }
+            ></Route>
+
+            <Route path="google-calendar" element={<GoogleCalendar />}></Route>
+
+            <Route
+              path="notes"
+              element={
+                <Notes notesDisplay={notesDisplay} updateNotes={updateNotes} />
+              }
+            ></Route>
+
+            <Route path="stopwatch" element={<TimeTracker />}></Route>
+
+            <Route
+              path="heatmap"
+              element={
+                <Heatmap
+                  completedTasks={completedTasks}
                   completedDate={completedDate}
                 />
-                <Notes notesDisplay={notesDisplay} updateNotes={updateNotes} />
-                <TimeTracker />
-                <Heatmap completedTasks={completedTasks} />
-              </div>
-            }
-          ></Route>
+              }
+            ></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
 
-          <Route
-            path="task-list"
-            element={
-              <TaskListContainer
-                taskList={taskList}
-                setTaskList={setTaskList}
-                addNewTaskToList={addNewTaskToList}
-                setNotesDisplay={setNotesDisplay}
-                completedDate={completedDate}
-                setCompletedTasks={setCompletedTasks}
-              />
-            }
-          ></Route>
-
-          <Route
-            path="calendar"
-            element={<CalendarComponent setCompletedDate={setCompletedDate} />}
-          ></Route>
-
-          <Route path="google-calendar" element={<GoogleCalendar />}></Route>
-
-          <Route
-            path="notes"
-            element={
-              <Notes notesDisplay={notesDisplay} updateNotes={updateNotes} />
-            }
-          ></Route>
-
-          <Route path="stopwatch" element={<TimeTracker />}></Route>
-
-          <Route
-            path="heatmap"
-            element={
-              <Heatmap
-                completedTasks={completedTasks}
-                completedDate={completedDate}
-              />
-            }
-          ></Route>
-        </Routes>
-      </BrowserRouter>
+      <Footer />
     </div>
   );
 }

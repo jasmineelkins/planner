@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import RouteButton from "./RouteButton";
 import TimedActivitiesOutput from "./TimedActivitiesOutput.js";
-
-//useRef helps us to get or control any element's reference
-
 import useTimer from "../hooks/useTimer";
 
 function TimeTracker(props) {
@@ -18,13 +15,10 @@ function TimeTracker(props) {
     formattedTime,
   } = useTimer(0);
 
-  // set state for activity controlled input form:
   const [activityInput, setActivityInput] = useState({
     name: "",
     time: "",
   });
-
-  // set state for completed timed activities list
   const [activityList, setActivityList] = useState([]);
 
   function handleInput(e) {
@@ -58,14 +52,16 @@ function TimeTracker(props) {
 
   return (
     <div className="timeTrackerContainer griditem item5">
-      <RouteButton path="stopwatch" />
-
       <div className="activityTrackerForm">
-        <h3>Stopwatch</h3>
+        <div className="buttonBar">
+          <RouteButton path="stopwatch" />
+          <h3>Time Tracker</h3>
+        </div>
+
         <form className="activityForm" onSubmit={(e) => handleSubmit(e)}>
           <input
             name="name"
-            placeholder="Track an activity"
+            placeholder="Enter activity"
             onChange={(e) => handleInput(e)}
             value={activityInput.name}
           ></input>

@@ -18,12 +18,12 @@ function DailyQuote() {
   }
 
   return (
-    <div className="tipsContainer item7">
-      <div className="innerTipContainer">
+    <div className="quoteContainer item7">
+      <div className="innerQuoteContainer">
         <span>{quote.text}</span>
         <span style={{ fontStyle: "italic" }}>-{quote.author}</span>
       </div>
-      <button onClick={getQuote} className="btn random-tip">
+      <button onClick={getQuote} className="btn random-quote">
         New Quote
       </button>
     </div>

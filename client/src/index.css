@@ -19,7 +19,6 @@
 }
 
 /* GENERAL --------------------------------------------------------- */
-
 * {
   margin: 0;
   padding: 0;
@@ -47,9 +46,9 @@ body {
   align-items: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+h3 {
+  margin: 20px 0;
+  font-size: 24px;
 }
 
 .pageContainer {
@@ -60,6 +59,40 @@ code {
 .contentWrap {
   padding: 30px;
   padding-bottom: 8rem;
+}
+
+/* Outer containers ----------------------------------- */
+.taskListContainerContainer,
+.quoteContainer,
+.calendarContainer,
+.notesContainer,
+.timeTrackerContainer,
+.heatmapContainer,
+.googleCalendarContainer,
+Header {
+  border: 1px solid yellow;
+  border-radius: 25px;
+  box-shadow: 0 0 2px yellow, 0 0 3px yellow;
+  padding: 20px;
+}
+
+.buttonBar {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 20px;
+}
+
+input {
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 18px;
+  font-family: TimeBurner;
+  background-color: rgb(248, 236, 233);
+}
+
+input::placeholder {
+  font-style: italic;
 }
 
 /* GRID -------------------------------------------------------------------------------------- */
@@ -83,7 +116,7 @@ code {
   grid-area: heatmap;
 }
 .item7 {
-  grid-area: tips;
+  grid-area: quote;
 }
 .item8 {
   grid-area: google-cal;
@@ -96,7 +129,7 @@ code {
   grid-template-areas:
     "header header header"
     "google-cal google-cal google-cal"
-    "tasks tasks tips"
+    "tasks tasks quote"
     "tasks tasks calendar"
     "tasks tasks calendar"
     "notes notes timer"
@@ -106,35 +139,7 @@ code {
   gap: 10px;
 }
 
-/* Outer containers ----------------------------------- */
-#taskListContainerContainer,
-.tipsContainer,
-.calendarContainer,
-.notesContainer,
-.timeTrackerContainer,
-.heatmapContainer,
-.googleCalendarContainer,
-Header {
-  border: 1px solid yellow;
-  border-radius: 25px;
-  box-shadow: 0 0 2px yellow, 0 0 3px yellow;
-  padding: 20px;
-}
-
-input {
-  border-radius: 6px;
-  padding: 6px;
-  font-size: 18px;
-  font-family: TimeBurner;
-  background-color: rgb(248, 236, 233);
-}
-
-input::placeholder {
-  font-style: italic;
-}
-
 /* BUTTONS ------------------------------------------------------------------------- */
-
 .btn {
   border-radius: 15px;
   padding: 10px;
@@ -164,7 +169,7 @@ input::placeholder {
 .btn.save:hover,
 .btn.reset:hover,
 .btn.submit:hover,
-.btn.random-tip:hover {
+.btn.random-quote:hover {
   background-color: rgb(165, 152, 152);
 }
 
@@ -196,15 +201,13 @@ Header {
   text-align: center;
   padding: 30px;
   background-color: var(--header);
-  /* text-transform: uppercase; */
 }
 
 /* TO DO LIST ----------------------------------------------------------------------------- */
-#taskListContainerContainer {
+.taskListContainerContainer {
   background-color: rgba(211, 165, 157, 0.7);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 20px;
 }
 
@@ -303,8 +306,8 @@ input[type="checkbox"]:focus {
   outline: none !important;
 }
 
-/* TIP OF THE DAY ------------------------------------------------------------------------- */
-.tipsContainer {
+/* QUOTE OF THE DAY ------------------------------------------------------------------------- */
+.quoteContainer {
   background-color: rgb(217, 194, 211, 0.7);
   color: var(--text);
   min-height: 100px;
@@ -313,10 +316,9 @@ input[type="checkbox"]:focus {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  /* width: 75%; */
 }
 
-.innerTipContainer {
+.innerQuoteContainer {
   background-color: #f9e9f4;
   border: 1px solid yellow;
   padding: 20px;
@@ -389,6 +391,11 @@ input[type="checkbox"]:focus {
   flex-direction: column;
   color: var(--text);
   max-width: 400px;
+}
+
+.timeTrackerContainer p {
+  margin: 20px 0;
+  font-size: 24px;
 }
 
 .timedActivityOutputContainer {
@@ -464,34 +471,52 @@ footer .icon:visited {
 
 /* MEDIA QUERIES ----------------------------------------------------------------- */
 @media only screen and (max-width: 900px) {
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
   .gridContainer {
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 50% 50%;
     grid-template-rows: auto;
+    align-items: center;
     grid-template-areas:
-      "header"
-      "tasks"
-      "calendar"
-      "timer"
-      "notes"
-      "heatmap";
+      "header header"
+      "tasks tasks"
+      "timer quote"
+      "timer calendar"
+      "notes notes"
+      "heatmap heatmap";
     gap: 10px;
+  }
+
+  .taskListContainerContainer {
+    margin-top: 20px;
   }
 
   .notesOutputContainer {
     height: 50%;
   }
+
+  input.btn.save {
+    margin: 10px;
+  }
 }
 
-/* MAXIMIZED COMPONENTS (ROUTES) -------------------------------------------------- */
-.gridContainer.maximized {
-  display: block;
-  width: 100%;
+@media only screen and (max-width: 650px) {
+  .gridContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .taskListContainerContainer {
+    margin-top: 20px;
+  }
+
+  .notesContainer textarea {
+    width: 80%;
+  }
+
+  .notesOutputContainer {
+    height: 50%;
+  }
 }

@@ -134,12 +134,12 @@ span.react-calendar__navigation__label__labelText {
 /* MEDIA QUERIES ----------------------------------------------------------------- */
 @media only screen and (max-width: 900px) {
   .react-calendar {
-    max-width: 450px;
+    max-width: 250px;
   }
   .react-calendar__month-view__weekdays {
-    font-size: 1.1em;
+    font-size: 0.8em;
   }
   .react-calendar__month-view__days__day {
-    font-size: 1.1em;
+    font-size: 1em;
   }
 }

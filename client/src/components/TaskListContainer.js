@@ -21,10 +21,12 @@ function TaskListContainer({
   }, [notesDisplay]);
 
   return (
-    <div id="taskListContainerContainer" className="griditem item2">
-      <RouteButton path="task-list" />
+    <div className="griditem item2 taskListContainerContainer">
+      <div className="buttonBar">
+        <RouteButton path="task-list" />
+        <NewTaskForm taskList={taskList} setTaskList={setTaskList} />
+      </div>
 
-      <NewTaskForm taskList={taskList} setTaskList={setTaskList} />
       <TaskList
         completedTasks={completedTasks}
         setCompletedTasks={setCompletedTasks}

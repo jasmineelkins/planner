@@ -1,24 +1,18 @@
-# README
+Designed and built by Jasmine Elkins in May 2022 using the concept and code from my Phase 2 React project at Flatiron School. The goal of this project was to build a Rails project from scratch, including a fully functioning React front end.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Users of this productivity tracking app can add tasks to their to-do list, which is ranked by priority. Priority level can be updated and tasks can be marked 'complete' or deleted.
+In the notes component, users can save notes related to each individual task.
 
-Things you may want to cover:
+The time tracker component allows users to use a stopwatch to track the amount of time they spend on individual activities.
 
-* Ruby version
+Clicking on the calendar component allows users to set the 'completed' date for a task. Soon it will allow a user to add tasks to a specific day. Clicking on the button in the top left corner of each component will expand that component to full screen via React Routes; clicking the button from full-screen view will return back to the homepage. The maximized view of the calendar component will show the user's google calendar.
 
-* System dependencies
+CREDITS:
+Background image: <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik - www.freepik.com</a>
 
-* Configuration
+Free quote API: https://forum.freecodecamp.org/t/free-api-inspirational-quotes-json-with-code-examples/311373
 
-* Database creation
+REACT LIBRARIES:
+Heatmap: https://www.npmjs.com/package/react-heatmap-grid
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Calendar: https://www.npmjs.com/package/react-calendar

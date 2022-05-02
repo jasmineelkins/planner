@@ -15,7 +15,7 @@ function RouteButton({ path }) {
       {buttonClicked ? (
         <button
           onClick={() => setButtonClicked(!buttonClicked)}
-          className="btn link"
+          className="btn link routeBtn"
         >
           {" "}
           <Link to={path}>
@@ -23,7 +23,7 @@ function RouteButton({ path }) {
           </Link>
         </button>
       ) : (
-        <button onClick={() => handleClick()} className="btn return">
+        <button onClick={() => handleClick()} className="btn return routeBtn">
           <FiChevronsLeft />
         </button>
       )}

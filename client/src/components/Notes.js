@@ -45,9 +45,10 @@ function Notes({ notesDisplay, updateNotes }) {
   return (
     <div className="notesContainer griditem item4">
       <div className="leftDiv">
-        <RouteButton path="notes" />
-
-        <h3>Notes</h3>
+        <div className="buttonBar">
+          <RouteButton path="notes" />
+          <h3>Notes</h3>
+        </div>
         <form onSubmit={handleNote}>
           <textarea name="notes"></textarea>
           <br></br>

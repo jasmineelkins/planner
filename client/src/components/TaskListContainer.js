@@ -1,35 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
 import RouteButton from "./RouteButton";
 
-const defaultFormState = {
-  name: "",
-  priority: "normal",
-  completed: "false",
-};
-
 function TaskListContainer({
-  taskList,
-  setTaskList,
-  addNewTaskToList,
+  notesDisplay,
   setNotesDisplay,
+  completedDate,
   completedTasks,
   setCompletedTasks,
-  completedDate,
 }) {
-  const [formState, setFormState] = useState(defaultFormState);
+  const [taskList, setTaskList] = useState([]);
+
+  // fetch tasks & set taskList state when notesDisplay is updated (ie new note added)
+  useEffect(() => {
+    fetch(`/tasks`)
+      .then((res) => res.json())
+      .then((listOfTasks) => setTaskList(listOfTasks))
+      .catch((error) => console.log(error.message));
+  }, [notesDisplay]);
 
   return (
     <div id="taskListContainerContainer" className="griditem item2">
       <RouteButton path="task-list" />
 
-      <NewTaskForm
-        formState={formState}
-        setFormState={setFormState}
-        defaultFormState={defaultFormState}
-        addNewTaskToList={addNewTaskToList}
-      />
+      <NewTaskForm taskList={taskList} setTaskList={setTaskList} />
       <TaskList
         completedTasks={completedTasks}
         setCompletedTasks={setCompletedTasks}

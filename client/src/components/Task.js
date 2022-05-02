@@ -31,7 +31,7 @@ function Task({
   }, [dropdownChoice, isChecked, completedDate]);
 
   function deleteTask(taskID) {
-    fetch(`http://localhost:3000/tasks/${taskID}`, {
+    fetch(`/tasks/${taskID}`, {
       method: "DELETE",
     }).then((res) => {
       if (res.ok) {
@@ -49,7 +49,7 @@ function Task({
     setDropdownChoice(e.target.value);
 
     // PATCH dropdown input
-    fetch(`http://localhost:3000/tasks/${task.id}`, {
+    fetch(`/tasks/${task.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function Task({
     setIsChecked(!isChecked);
 
     // PATCH checkbox input data
-    fetch(`http://localhost:3000/tasks/${task.id}`, {
+    fetch(`/tasks/${task.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +91,7 @@ function Task({
   return (
     <div className="task">
       <span className={completedStatusClass} onClick={handleNotesDisplay}>
-        {task.name}
+        {task.description}
       </span>
 
       <select

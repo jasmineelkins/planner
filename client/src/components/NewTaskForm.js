@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
-function NewTaskForm({
-  formState,
-  setFormState,
-  defaultFormState,
-  addNewTaskToList,
-}) {
-  const { name, priority } = formState;
+const defaultFormState = {
+  description: "",
+  priority: "normal",
+  completed: "false",
+};
 
-  function handleChange(e) {
+function NewTaskForm({ taskList, setTaskList }) {
+  const [formState, setFormState] = useState(defaultFormState);
+  const { description, priority } = formState;
+
+  function addNewTaskToList(newTask) {
+    const updatedTaskList = [...taskList, newTask];
+
+    setTaskList(updatedTaskList);
+  }
+
+  function handleFormChange(e) {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value,
@@ -18,23 +26,27 @@ function NewTaskForm({
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/tasks`, {
+    fetch(`/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3002",
+        "Access-Control-Allow-Origin": "http://localhost:4000",
       },
       body: JSON.stringify({
-        name: name,
+        description: description,
         priority: priority,
         completed: false,
-        notes: [],
+        date_completed: "",
       }),
     })
       .then((res) => res.json())
-      .then((newTaskObj) => addNewTaskToList(newTaskObj))
-      .catch((error) => console.log(error.message));
+      .then((newTaskObj) => {
+        addNewTaskToList(newTaskObj);
+        console.log("New task object:", newTaskObj);
+      })
+      // .then((newTaskObj) => console.log("New task object:", newTaskObj))
+      .catch((error) => console.log("Error:", error.message));
 
     setFormState(defaultFormState);
   }
@@ -43,16 +55,16 @@ function NewTaskForm({
     <div className="newTaskFormContainer">
       <form className="newTaskForm" onSubmit={(e) => handleSubmit(e)}>
         <input
-          name="name"
+          name="description"
           placeholder="Enter task"
-          onChange={(e) => handleChange(e)}
-          value={name}
+          onChange={(e) => handleFormChange(e)}
+          value={description}
         ></input>
 
         <select
           name="priority"
           id="priority"
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleFormChange(e)}
           value={priority}
         >
           <option value="high">High</option>

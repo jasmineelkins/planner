@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import TaskListContainer from "./components/TaskListContainer";
 import CalendarComponent from "./components/CalendarContainer";
@@ -11,23 +11,9 @@ import DailyQuote from "./components/DailyQuote";
 import Footer from "./components/Footer";
 
 function App() {
-  const [taskList, setTaskList] = useState([]);
   const [notesDisplay, setNotesDisplay] = useState({});
   const [completedTasks, setCompletedTasks] = useState([]);
   const [completedDate, setCompletedDate] = useState(new Date().toISOString());
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/tasks`)
-      .then((res) => res.json())
-      .then((listOfTasks) => setTaskList(listOfTasks))
-      .catch((error) => console.log(error.message));
-  }, [notesDisplay]);
-
-  function addNewTaskToList(newTask) {
-    const updatedTaskList = [...taskList, newTask];
-
-    setTaskList(updatedTaskList);
-  }
 
   function updateNotes(updatedTask) {
     setNotesDisplay(updatedTask);
@@ -45,13 +31,11 @@ function App() {
               element={
                 <div className="App gridContainer">
                   <TaskListContainer
-                    setCompletedTasks={setCompletedTasks}
-                    taskList={taskList}
-                    setTaskList={setTaskList}
-                    addNewTaskToList={addNewTaskToList}
+                    notesDisplay={notesDisplay}
                     setNotesDisplay={setNotesDisplay}
                     completedDate={completedDate}
                     completedTasks={completedTasks}
+                    setCompletedTasks={setCompletedTasks}
                   />
                   <DailyQuote />
                   <CalendarComponent
@@ -72,11 +56,10 @@ function App() {
               path="task-list"
               element={
                 <TaskListContainer
-                  taskList={taskList}
-                  setTaskList={setTaskList}
-                  addNewTaskToList={addNewTaskToList}
+                  notesDisplay={notesDisplay}
                   setNotesDisplay={setNotesDisplay}
                   completedDate={completedDate}
+                  completedTasks={completedTasks}
                   setCompletedTasks={setCompletedTasks}
                 />
               }

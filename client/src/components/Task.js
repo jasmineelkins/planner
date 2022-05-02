@@ -7,8 +7,9 @@ function Task({
   task,
   deleteTaskFromList,
   updateTaskInList,
-  setNotesDisplay,
+  // setNotesDisplay,
   completedDate,
+  setSelectedTask,
 }) {
   const [dropdownChoice, setDropdownChoice] = useState(task.priority);
   const [isChecked, setIsChecked] = useState(task.completed);
@@ -42,7 +43,10 @@ function Task({
   }
 
   function handleNotesDisplay() {
-    setNotesDisplay(task);
+    console.log("Selected Task:", task);
+    console.log("Notes:", task.notes);
+
+    setSelectedTask(task);
   }
 
   function handleDropdownSelection(e) {

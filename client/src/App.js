@@ -11,13 +11,15 @@ import DailyQuote from "./components/DailyQuote";
 import Footer from "./components/Footer";
 
 function App() {
-  const [notesDisplay, setNotesDisplay] = useState({});
+  // const [notesDisplay, setNotesDisplay] = useState({});
   const [completedTasks, setCompletedTasks] = useState([]);
   const [completedDate, setCompletedDate] = useState(new Date().toISOString());
 
-  function updateNotes(updatedTask) {
-    setNotesDisplay(updatedTask);
-  }
+  const [selectedTask, setSelectedTask] = useState({});
+
+  // function updateNotes(updatedTask) {
+  //   setNotesDisplay(updatedTask);
+  // }
 
   return (
     <div className="pageContainer">
@@ -31,11 +33,13 @@ function App() {
               element={
                 <div className="App gridContainer">
                   <TaskListContainer
-                    notesDisplay={notesDisplay}
-                    setNotesDisplay={setNotesDisplay}
+                    // notesDisplay={notesDisplay}
+                    // setNotesDisplay={setNotesDisplay}
                     completedDate={completedDate}
                     completedTasks={completedTasks}
                     setCompletedTasks={setCompletedTasks}
+                    selectedTask={selectedTask}
+                    setSelectedTask={setSelectedTask}
                   />
                   <DailyQuote />
                   <CalendarComponent
@@ -43,8 +47,9 @@ function App() {
                     completedDate={completedDate}
                   />
                   <Notes
-                    notesDisplay={notesDisplay}
-                    updateNotes={updateNotes}
+                    // notesDisplay={notesDisplay}
+                    // updateNotes={updateNotes}
+                    selectedTask={selectedTask}
                   />
                   <TimeTracker />
                   <Heatmap completedTasks={completedTasks} />
@@ -56,11 +61,13 @@ function App() {
               path="task-list"
               element={
                 <TaskListContainer
-                  notesDisplay={notesDisplay}
-                  setNotesDisplay={setNotesDisplay}
+                  // notesDisplay={notesDisplay}
+                  // setNotesDisplay={setNotesDisplay}
                   completedDate={completedDate}
                   completedTasks={completedTasks}
                   setCompletedTasks={setCompletedTasks}
+                  selectedTask={selectedTask}
+                  setSelectedTask={setSelectedTask}
                 />
               }
             ></Route>
@@ -77,7 +84,11 @@ function App() {
             <Route
               path="notes"
               element={
-                <Notes notesDisplay={notesDisplay} updateNotes={updateNotes} />
+                <Notes
+                  // notesDisplay={notesDisplay}
+                  // updateNotes={updateNotes}
+                  selectedTask={selectedTask}
+                />
               }
             ></Route>
 

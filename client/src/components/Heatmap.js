@@ -6,7 +6,7 @@ import RouteButton from "./RouteButton";
 function Heatmap({ completedTasks }) {
   // 1. count how many items are in completedTasks
 
-  console.log("Completed Tasks: ", completedTasks);
+  // console.log("Completed Tasks: ", completedTasks);
   // const [heatMap, setHeatMap] = useState([]);
 
   // useEffect(() => {
@@ -31,13 +31,13 @@ function Heatmap({ completedTasks }) {
   }
 
   let heatMapObj = groupBy(completedTasks, "date");
-  console.log("heatmapobj", heatMapObj);
+  // console.log("heatmapobj", heatMapObj);
 
   const heatMapArray = Object.keys(heatMapObj).map((obj) => ({
     date: obj,
     count: heatMapObj[obj].length,
   }));
-  console.log(heatMapArray);
+  // console.log(heatMapArray);
 
   return (
     <div className="heatmapContainer item6">

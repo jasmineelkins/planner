@@ -1,46 +1,105 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RouteButton from "./RouteButton";
 import Note from "./Note";
 
-function Notes({ notesDisplay, updateNotes }) {
-  function handleNote(e) {
+function Notes({ updateNotes, selectedTask }) {
+  const [formInput, setFormInput] = useState("");
+
+  // function handleNote(e) {
+  //   e.preventDefault();
+
+  //   const newTaskNotes = {
+  //     ...notesDisplay,
+  //     notes: [...notesDisplay.notes, e.target.notes.value],
+  //   };
+
+  //   fetch(`http://localhost:3000/tasks/${notesDisplay.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(newTaskNotes),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((updatedTask) => updateNotes(updatedTask));
+
+  //   e.target.reset();
+  // }
+
+  // function handleResetNotes(e) {
+  //   e.preventDefault();
+
+  //   const newTaskNotes = { ...notesDisplay, notes: [] };
+
+  //   fetch(`http://localhost:3000/tasks/${notesDisplay.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(newTaskNotes),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((updatedTask) => updateNotes(updatedTask));
+  // }
+
+  // const notesToDisplay = notesDisplay.map((note) => console.log(note));
+  console.log("Is there a selected task", selectedTask.id);
+
+  function handleFormChange(e) {
+    setFormInput(e.target.value);
+  }
+
+  function handleAddNote(e) {
     e.preventDefault();
 
-    const newTaskNotes = {
-      ...notesDisplay,
-      notes: [...notesDisplay.notes, e.target.notes.value],
-    };
+    console.log(formInput);
 
-    fetch(`http://localhost:3000/tasks/${notesDisplay.id}`, {
-      method: "PATCH",
+    //  PATCH form to Note content, linked to task_id of clicked task
+    fetch(`/notes/`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      body: JSON.stringify(newTaskNotes),
+      body: JSON.stringify({
+        content: formInput,
+        task_id: selectedTask.id,
+      }),
     })
       .then((res) => res.json())
-      .then((updatedTask) => updateNotes(updatedTask));
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error.message));
 
-    e.target.reset();
+    setFormInput("");
   }
 
   function handleResetNotes(e) {
     e.preventDefault();
 
-    const newTaskNotes = { ...notesDisplay, notes: [] };
+    // DELETE all notes for that task_id from database
 
-    fetch(`http://localhost:3000/tasks/${notesDisplay.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTaskNotes),
-    })
-      .then((res) => res.json())
-      .then((updatedTask) => updateNotes(updatedTask));
+    setFormInput("");
   }
 
-  // const notesToDisplay = notesDisplay.map((note) => console.log(note));
+  // const notesToDisplay = selectedTask.notes.map((note) => (
+  //   <li>{note.content}</li>
+  // ));
+
+  let notesToDisplay = <li></li>;
+
+  if (selectedTask) {
+    if (selectedTask.notes === undefined) {
+      notesToDisplay = <li>undefined</li>;
+    } else if (selectedTask.notes === []) {
+      console.log("### notes array is empty", selectedTask.notes);
+      notesToDisplay = <li>empty array - no notes saved for this task</li>;
+    } else if (selectedTask.notes) {
+      console.log("### there are task notes!", selectedTask.notes);
+      notesToDisplay = selectedTask.notes.map((note) => (
+        <li key={note.id}>{note.content}</li>
+      ));
+    }
+  }
 
   return (
     <div className="notesContainer griditem item4">
@@ -49,8 +108,12 @@ function Notes({ notesDisplay, updateNotes }) {
           <RouteButton path="notes" />
           <h3>Notes</h3>
         </div>
-        <form onSubmit={handleNote}>
-          <textarea name="notes"></textarea>
+        <form onSubmit={handleAddNote}>
+          <textarea
+            name="content"
+            onChange={(e) => handleFormChange(e)}
+            value={formInput}
+          ></textarea>
           <br></br>
           <button type="submit" className="btn edit">
             Add Note
@@ -64,21 +127,21 @@ function Notes({ notesDisplay, updateNotes }) {
 
       <div className="rightDiv">
         <h4>
-          {notesDisplay.name
-            ? `Notes for ${notesDisplay.name}:`
-            : `Click a Task To Edit Notes`}
+          {selectedTask.description
+            ? `Notes for ${selectedTask.description}:`
+            : `Click a Task To View/Edit Notes`}
         </h4>
 
         <div className="notesOutputContainer">
-          {/* <ul>{notesToDisplay}</ul> */}
+          <ul>{notesToDisplay}</ul>
 
-          <ul>
+          {/* <ul>
             {notesDisplay.notes
               ? notesDisplay.notes.map((note, index) => (
                   <li key={index}>{note}</li>
                 ))
               : null}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>

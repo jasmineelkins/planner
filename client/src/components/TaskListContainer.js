@@ -9,6 +9,8 @@ function TaskListContainer({
   completedDate,
   completedTasks,
   setCompletedTasks,
+  selectedTask,
+  setSelectedTask,
 }) {
   const [taskList, setTaskList] = useState([]);
 
@@ -34,6 +36,7 @@ function TaskListContainer({
         setTaskList={setTaskList}
         setNotesDisplay={setNotesDisplay}
         completedDate={completedDate}
+        setSelectedTask={setSelectedTask}
       />
     </div>
   );

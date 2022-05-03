@@ -4,8 +4,6 @@ import TaskList from "./TaskList";
 import RouteButton from "./RouteButton";
 
 function TaskListContainer({
-  notesDisplay,
-  setNotesDisplay,
   completedDate,
   completedTasks,
   setCompletedTasks,
@@ -14,13 +12,13 @@ function TaskListContainer({
 }) {
   const [taskList, setTaskList] = useState([]);
 
-  // fetch tasks & set taskList state when notesDisplay is updated (ie new note added)
+  // fetch tasks & set taskList
   useEffect(() => {
     fetch(`/tasks`)
       .then((res) => res.json())
       .then((listOfTasks) => setTaskList(listOfTasks))
       .catch((error) => console.log(error.message));
-  }, [notesDisplay]);
+  }, []);
 
   return (
     <div className="griditem item2 taskListContainerContainer">
@@ -34,7 +32,6 @@ function TaskListContainer({
         setCompletedTasks={setCompletedTasks}
         taskList={taskList}
         setTaskList={setTaskList}
-        setNotesDisplay={setNotesDisplay}
         completedDate={completedDate}
         setSelectedTask={setSelectedTask}
       />

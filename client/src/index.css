@@ -323,7 +323,7 @@ input[type="checkbox"]:focus {
   border: 1px solid yellow;
   padding: 20px;
   border-radius: 15px;
-  width: 75%;
+  min-width: 80%;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -337,7 +337,7 @@ input[type="checkbox"]:focus {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 75%;
+  width: 80%;
 }
 
 .innerCalendarContainer {

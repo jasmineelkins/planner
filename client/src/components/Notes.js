@@ -2,48 +2,8 @@ import React, { useEffect, useState } from "react";
 import RouteButton from "./RouteButton";
 import Note from "./Note";
 
-function Notes({ updateNotes, selectedTask }) {
+function Notes({ selectedTask }) {
   const [formInput, setFormInput] = useState("");
-
-  // function handleNote(e) {
-  //   e.preventDefault();
-
-  //   const newTaskNotes = {
-  //     ...notesDisplay,
-  //     notes: [...notesDisplay.notes, e.target.notes.value],
-  //   };
-
-  //   fetch(`http://localhost:3000/tasks/${notesDisplay.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newTaskNotes),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((updatedTask) => updateNotes(updatedTask));
-
-  //   e.target.reset();
-  // }
-
-  // function handleResetNotes(e) {
-  //   e.preventDefault();
-
-  //   const newTaskNotes = { ...notesDisplay, notes: [] };
-
-  //   fetch(`http://localhost:3000/tasks/${notesDisplay.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newTaskNotes),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((updatedTask) => updateNotes(updatedTask));
-  // }
-
-  // const notesToDisplay = notesDisplay.map((note) => console.log(note));
-  console.log("Is there a selected task", selectedTask.id);
 
   function handleFormChange(e) {
     setFormInput(e.target.value);
@@ -54,7 +14,7 @@ function Notes({ updateNotes, selectedTask }) {
 
     console.log(formInput);
 
-    //  PATCH form to Note content, linked to task_id of clicked task
+    //  POST form to Note content, linked to task_id of clicked task
     fetch(`/notes/`, {
       method: "POST",
       headers: {
@@ -81,10 +41,7 @@ function Notes({ updateNotes, selectedTask }) {
     setFormInput("");
   }
 
-  // const notesToDisplay = selectedTask.notes.map((note) => (
-  //   <li>{note.content}</li>
-  // ));
-
+  // Does not re render automatically yet:
   let notesToDisplay = <li></li>;
 
   if (selectedTask) {

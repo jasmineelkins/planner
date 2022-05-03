@@ -11,15 +11,11 @@ import DailyQuote from "./components/DailyQuote";
 import Footer from "./components/Footer";
 
 function App() {
-  // const [notesDisplay, setNotesDisplay] = useState({});
   const [completedTasks, setCompletedTasks] = useState([]);
-  const [completedDate, setCompletedDate] = useState(new Date().toISOString());
-
+  const [completedDate, setCompletedDate] = useState(
+    new Date().toISOString().slice(0, 9)
+  );
   const [selectedTask, setSelectedTask] = useState({});
-
-  // function updateNotes(updatedTask) {
-  //   setNotesDisplay(updatedTask);
-  // }
 
   return (
     <div className="pageContainer">
@@ -33,8 +29,6 @@ function App() {
               element={
                 <div className="App gridContainer">
                   <TaskListContainer
-                    // notesDisplay={notesDisplay}
-                    // setNotesDisplay={setNotesDisplay}
                     completedDate={completedDate}
                     completedTasks={completedTasks}
                     setCompletedTasks={setCompletedTasks}
@@ -46,11 +40,7 @@ function App() {
                     setCompletedDate={setCompletedDate}
                     completedDate={completedDate}
                   />
-                  <Notes
-                    // notesDisplay={notesDisplay}
-                    // updateNotes={updateNotes}
-                    selectedTask={selectedTask}
-                  />
+                  <Notes selectedTask={selectedTask} />
                   <TimeTracker />
                   <Heatmap completedTasks={completedTasks} />
                 </div>
@@ -61,8 +51,6 @@ function App() {
               path="task-list"
               element={
                 <TaskListContainer
-                  // notesDisplay={notesDisplay}
-                  // setNotesDisplay={setNotesDisplay}
                   completedDate={completedDate}
                   completedTasks={completedTasks}
                   setCompletedTasks={setCompletedTasks}
@@ -83,13 +71,7 @@ function App() {
 
             <Route
               path="notes"
-              element={
-                <Notes
-                  // notesDisplay={notesDisplay}
-                  // updateNotes={updateNotes}
-                  selectedTask={selectedTask}
-                />
-              }
+              element={<Notes selectedTask={selectedTask} />}
             ></Route>
 
             <Route path="stopwatch" element={<TimeTracker />}></Route>

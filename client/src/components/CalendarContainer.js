@@ -7,9 +7,9 @@ function CalendarComponent({ setCompletedDate }) {
   const [date, setDate] = useState(new Date());
 
   function handleUpdateDate(value) {
-    console.log("DATE: ", value.toISOString());
+    console.log("SELECTED DATE: ", value.toISOString().slice(0, 10));
     setDate(value);
-    setCompletedDate(value.toISOString());
+    setCompletedDate(value.toISOString().slice(0, 10));
   }
 
   return (

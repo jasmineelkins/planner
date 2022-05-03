@@ -46,7 +46,6 @@ function TaskList({
         key={task.id}
         deleteTaskFromList={deleteTaskFromList}
         updateTaskInList={updateTaskInList}
-        setNotesDisplay={setNotesDisplay}
         notes={notes}
         completedTasks={completedTasks}
         setCompletedTasks={setCompletedTasks}

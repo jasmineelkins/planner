@@ -7,7 +7,6 @@ function Task({
   task,
   deleteTaskFromList,
   updateTaskInList,
-  // setNotesDisplay,
   completedDate,
   setSelectedTask,
 }) {
@@ -71,8 +70,9 @@ function Task({
     // set the state to update user interface
   }
 
-  function handleClick(e) {
+  function handleCheckedClick(e) {
     setIsChecked(!isChecked);
+    console.log("COMPLETED DATE: ", completedDate);
 
     // PATCH checkbox input data
     fetch(`/tasks/${task.id}`, {
@@ -84,7 +84,7 @@ function Task({
       },
       body: JSON.stringify({
         completed: !isChecked,
-        date: completedDate,
+        date_completed: completedDate,
       }),
     })
       .then((res) => res.json())
@@ -117,7 +117,7 @@ function Task({
 
       <input
         type="checkbox"
-        onChange={(e) => handleClick(e)}
+        onChange={(e) => handleCheckedClick(e)}
         checked={isChecked}
       ></input>
 

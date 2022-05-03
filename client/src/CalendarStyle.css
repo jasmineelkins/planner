@@ -143,3 +143,19 @@ span.react-calendar__navigation__label__labelText {
     font-size: 1em;
   }
 }
+
+@media only screen and (max-width: 650px) {
+  .react-calendar {
+    max-width: 450px;
+  }
+  .react-calendar__month-view__weekdays {
+    font-size: 1.3em;
+  }
+  .react-calendar__month-view__days__day {
+    font-size: 1.2em;
+  }
+  span.react-calendar__navigation__label__labelText {
+    font-weight: bold;
+    font-size: 24px;
+  }
+}

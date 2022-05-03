@@ -99,6 +99,7 @@ function Task({
       </span>
 
       <select
+        className={completedStatusClass}
         name="selectList"
         id="selectList"
         onChange={(e) => handleDropdownSelection(e)}

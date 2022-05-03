@@ -257,8 +257,11 @@ Header {
   border-radius: 6px;
   padding: 6px 8px;
   font-family: TimeBurner;
-  /* font-size: 16px;
-  font-weight: bold; */
+}
+
+#selectList.completed {
+  background-color: rgba(156, 142, 137, 0.607);
+  pointer-events: none;
 }
 
 .taskName.completed {
@@ -373,6 +376,8 @@ input[type="checkbox"]:focus {
   grid-template-columns: 50% 50%;
   flex-direction: row;
   color: var(--text);
+  min-height: 400px;
+  min-width: 500px;
 }
 
 .notesOutputContainer {
@@ -390,7 +395,8 @@ input[type="checkbox"]:focus {
   display: flex;
   flex-direction: column;
   color: var(--text);
-  max-width: 400px;
+  min-width: 300px;
+  max-width: 500px;
 }
 
 .timeTrackerContainer p {
@@ -415,6 +421,7 @@ input[type="checkbox"]:focus {
 /* HEATMAP ----------------------------------------------------------------- */
 .heatmapContainer {
   background-color: rgb(237, 214, 210, 0.7);
+  min-width: 800px;
 }
 .react-calendar-heatmap .color-scale-1 {
   fill: #f70808;
@@ -497,6 +504,10 @@ footer .icon:visited {
   input.btn.save {
     margin: 10px;
   }
+
+  .heatmapContainer {
+    min-width: 650px;
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -518,5 +529,9 @@ footer .icon:visited {
 
   .notesOutputContainer {
     height: 50%;
+  }
+
+  .heatmapContainer {
+    min-width: 550px;
   }
 }

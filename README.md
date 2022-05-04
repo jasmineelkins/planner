@@ -10,6 +10,8 @@ Clicking on the calendar component allows users to set the 'completed' date for 
 CREDITS:
 Background image: <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik - www.freepik.com</a>
 
+Favicon: <a target="_blank" href="https://icons8.com/icon/8118/to-do">To Do</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
 Free quote API: https://forum.freecodecamp.org/t/free-api-inspirational-quotes-json-with-code-examples/311373
 
 REACT LIBRARIES:

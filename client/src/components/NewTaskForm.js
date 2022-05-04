@@ -38,6 +38,7 @@ function NewTaskForm({ taskList, setTaskList }) {
         priority: priority,
         completed: false,
         date_completed: "",
+        date_added: "",
       }),
     })
       .then((res) => res.json())

@@ -1,6 +1,6 @@
-Designed and built by Jasmine Elkins in May 2022 using the concept and code from my Phase 2 React project at Flatiron School. The goal of this project was to build a Rails project from scratch, including a fully functioning React front end.
+Designed and built in May 2022 using the concept from my Phase 2 React project at Flatiron School. The goal of this project was to build a Rails project from scratch, and to be able to deploy a usable app on Heroku.
 
-Users of this productivity tracking app can add tasks to their to-do list, which is ranked by priority. Priority level can be updated and tasks can be marked 'complete' or deleted.
+Users of this productivity app can add tasks to their to-do list, which is ranked by priority. Priority level can be updated and tasks can be marked 'complete' or deleted.
 In the notes component, users can save notes related to each individual task.
 
 The time tracker component allows users to use a stopwatch to track the amount of time they spend on individual activities.
@@ -14,5 +14,4 @@ Free quote API: https://forum.freecodecamp.org/t/free-api-inspirational-quotes-j
 
 REACT LIBRARIES:
 Heatmap: https://www.npmjs.com/package/react-heatmap-grid
-
 Calendar: https://www.npmjs.com/package/react-calendar

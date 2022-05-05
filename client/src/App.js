@@ -27,22 +27,27 @@ function App() {
             <Route
               path="/"
               element={
-                <div className="App gridContainer">
-                  <TaskListContainer
-                    completedDate={completedDate}
-                    completedTasks={completedTasks}
-                    setCompletedTasks={setCompletedTasks}
-                    selectedTask={selectedTask}
-                    setSelectedTask={setSelectedTask}
-                  />
-                  <DailyQuote />
-                  <CalendarComponent
-                    setCompletedDate={setCompletedDate}
-                    completedDate={completedDate}
-                  />
-                  <Notes selectedTask={selectedTask} />
-                  <TimeTracker />
-                  <Heatmap completedTasks={completedTasks} />
+                <div className="gridContainer">
+                  <div className="App leftColumn leftGridItem">
+                    <TaskListContainer
+                      completedDate={completedDate}
+                      completedTasks={completedTasks}
+                      setCompletedTasks={setCompletedTasks}
+                      selectedTask={selectedTask}
+                      setSelectedTask={setSelectedTask}
+                    />
+                    <Notes selectedTask={selectedTask} />
+                  </div>
+
+                  <div className="rightColumn rightGridItem">
+                    <DailyQuote />
+                    <CalendarComponent
+                      setCompletedDate={setCompletedDate}
+                      completedDate={completedDate}
+                    />
+                    <TimeTracker />
+                  </div>
+                  {/* <Heatmap completedTasks={completedTasks} /> */}
                 </div>
               }
             ></Route>

@@ -48,7 +48,14 @@ body {
 
 h3 {
   margin: 20px 0;
-  font-size: 24px;
+  font-size: 20px;
+}
+
+span,
+li,
+input,
+button {
+  font-size: 14px;
 }
 
 .pageContainer {
@@ -57,8 +64,20 @@ h3 {
 }
 
 .contentWrap {
-  padding: 30px;
   padding-bottom: 8rem;
+}
+
+.taskListContainerContainer,
+.notesContainer {
+  min-height: 300px;
+  min-width: 500px;
+}
+
+.quoteContainer,
+.calendarContainer,
+.timeTrackerContainer {
+  min-width: 300px;
+  max-width: 300px;
 }
 
 /* Outer containers ----------------------------------- */
@@ -85,8 +104,7 @@ Header {
 
 input {
   border-radius: 6px;
-  padding: 6px;
-  font-size: 18px;
+  padding: 5px;
   font-family: TimeBurner;
   background-color: rgb(248, 236, 233);
 }
@@ -122,28 +140,47 @@ input::placeholder {
   grid-area: google-cal;
 }
 
+.leftGridItem {
+  grid-area: leftColumn;
+}
+.rightGridItem {
+  grid-area: rightColumn;
+}
+
 .gridContainer {
   display: grid;
-  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-columns: 60% 40%;
   grid-template-rows: auto;
   grid-template-areas:
-    "header header header"
-    "google-cal google-cal google-cal"
-    "tasks tasks quote"
-    "tasks tasks calendar"
-    "tasks tasks calendar"
-    "notes notes timer"
-    "notes notes timer"
-    "notes notes ."
-    "heatmap heatmap heatmap";
+    "leftColumn rightColumn"
+    "leftColumn rightColumn"
+    "leftColumn rightColumn"
+    "heatmap heatmap";
   gap: 10px;
+  margin: 30px;
+}
+
+.leftColumn,
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  margin: 10px;
+}
+
+.leftColumn {
+  align-items: flex-end;
+}
+
+.rightColumn {
+  align-items: flex-start;
 }
 
 /* BUTTONS ------------------------------------------------------------------------- */
 .btn {
   border-radius: 15px;
   padding: 10px;
-  font-size: 14px;
   font-family: TimeBurner;
   background-color: #f9e7d7;
 }
@@ -196,11 +233,12 @@ input::placeholder {
 
 /* HEADER ----------------------------------------------------------------------------- */
 Header {
-  font-size: 50px;
+  font-size: 40px;
   color: var(--maroon);
   text-align: center;
-  padding: 30px;
+  padding: 20px;
   background-color: var(--header);
+  margin: 30px;
 }
 
 /* TO DO LIST ----------------------------------------------------------------------------- */
@@ -335,12 +373,11 @@ input[type="checkbox"]:focus {
 
 /* CALENDAR -----------------------------------------------------------------------------  */
 .calendarContainer {
-  margin: 20px;
   background-color: rgb(186, 143, 158, 0.7);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 80%;
+  /* width: 80%; */
 }
 
 .innerCalendarContainer {
@@ -371,13 +408,10 @@ input[type="checkbox"]:focus {
 /* NOTES -----------------------------------------------------------------------------  */
 .notesContainer {
   background-color: rgb(242, 207, 185, 0.7);
-  margin: 20px;
   display: grid;
   grid-template-columns: 50% 50%;
   flex-direction: row;
   color: var(--text);
-  min-height: 400px;
-  min-width: 500px;
 }
 
 .notesOutputContainer {
@@ -395,8 +429,6 @@ input[type="checkbox"]:focus {
   display: flex;
   flex-direction: column;
   color: var(--text);
-  min-width: 300px;
-  max-width: 500px;
 }
 
 .timeTrackerContainer p {
@@ -407,7 +439,6 @@ input[type="checkbox"]:focus {
 .timedActivityOutputContainer {
   display: flex;
   flex-direction: column;
-  min-height: 300px;
   margin-top: 10px;
   font-size: 18px;
   padding: 20px;
@@ -421,28 +452,29 @@ input[type="checkbox"]:focus {
 /* HEATMAP ----------------------------------------------------------------- */
 .heatmapContainer {
   background-color: rgb(237, 214, 210, 0.7);
-  min-width: 800px;
+  max-width: 800px;
+  align-self: center;
 }
 .react-calendar-heatmap .color-scale-1 {
-  fill: #f70808;
+  fill: #d28014;
 }
 .react-calendar-heatmap .color-scale-2 {
-  fill: #f75b07e2;
+  fill: #e46917e2;
 }
 .react-calendar-heatmap .color-scale-3 {
-  fill: #ffa200;
+  fill: #d13c2b;
 }
 .react-calendar-heatmap .color-scale-4 {
-  fill: #ffc505;
+  fill: #d31957;
 }
 .react-calendar-heatmap .color-scale-5 {
-  fill: #d9fa01d4;
+  fill: #c40380d4;
 }
 .react-calendar-heatmap .color-scale-6 {
-  fill: #68bd1e;
+  fill: #72014e;
 }
 .react-calendar-heatmap .color-scale-7 {
-  fill: #0a410d;
+  fill: #3d012f;
 }
 
 /* FOOTER ------------------------------------------------------------------------ */
@@ -458,7 +490,6 @@ footer {
   justify-content: center;
   gap: 10px;
   margin-top: 5rem;
-  padding: 10px;
   font-size: 14px;
   color: var(--maroon);
 }
@@ -478,17 +509,26 @@ footer .icon:visited {
 
 /* MEDIA QUERIES ----------------------------------------------------------------- */
 @media only screen and (max-width: 900px) {
+  .taskListContainerContainer,
+  .notesContainer {
+    min-height: 300px;
+    min-width: 350px;
+  }
+
+  .quoteContainer,
+  .calendarContainer,
+  .timeTrackerContainer {
+    /* min-width: 250px; */
+    max-width: 300px;
+  }
+
   .gridContainer {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: auto;
     align-items: center;
     grid-template-areas:
-      "header header"
-      "tasks tasks"
-      "timer quote"
-      "timer calendar"
-      "notes notes"
+      "leftColumn rightColumn"
       "heatmap heatmap";
     gap: 10px;
   }
@@ -499,6 +539,11 @@ footer .icon:visited {
 
   .notesOutputContainer {
     height: 50%;
+    margin: 10px;
+  }
+
+  .notesContainer .btn {
+    font-size: 12px;
   }
 
   input.btn.save {
@@ -511,12 +556,38 @@ footer .icon:visited {
 }
 
 @media only screen and (max-width: 650px) {
+  .taskListContainerContainer,
+  .notesContainer,
+  .calendarContainer {
+    min-height: 300px;
+    min-width: 450px;
+  }
+
   .gridContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
+  }
+
+  .rightColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rightColumn .calendarContainer {
+    order: 1;
+  }
+
+  .rightColumn .timeTrackerContainer {
+    order: 2;
+  }
+
+  .rightColumn .quoteContainer {
+    order: 3;
   }
 
   .taskListContainerContainer {

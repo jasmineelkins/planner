@@ -423,6 +423,11 @@ input[type="checkbox"]:focus {
   margin-top: 15px;
 }
 
+.defaultNote {
+  list-style-type: none;
+  font-style: italic;
+}
+
 /* TIME TRACKER --------------------------------------------------------------------------- */
 .timeTrackerContainer {
   background-color: rgb(230, 194, 194, 0.7);

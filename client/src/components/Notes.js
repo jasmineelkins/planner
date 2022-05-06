@@ -46,7 +46,9 @@ function Notes({ selectedTask }) {
 
   if (selectedTask) {
     if (selectedTask.notes === undefined) {
-      notesToDisplay = <li>undefined</li>;
+      notesToDisplay = (
+        <li className="defaultNote">click a task to view/add notes</li>
+      );
     } else if (selectedTask.notes === []) {
       console.log("### notes array is empty", selectedTask.notes);
       notesToDisplay = <li>empty array - no notes saved for this task</li>;
@@ -86,7 +88,7 @@ function Notes({ selectedTask }) {
         <h4>
           {selectedTask.description
             ? `Notes for ${selectedTask.description}:`
-            : `Click a Task To View/Edit Notes`}
+            : ` `}
         </h4>
 
         <div className="notesOutputContainer">

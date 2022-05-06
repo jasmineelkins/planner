@@ -6,10 +6,13 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Task.create(
-  description: 'Feed the cat',
-  date_added: '',
-  date_completed: '',
-  completed: false,
-  priority: 'High',
-)
+t1 =
+  Task.create(
+    description: 'Feed the cat',
+    date_added: '',
+    date_completed: '',
+    completed: false,
+    priority: 'High',
+  )
+
+Note.create(content: 'MEOW', task_id: t1.id)

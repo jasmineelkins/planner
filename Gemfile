@@ -70,3 +70,5 @@ end
 gem 'rack-cors'
 
 gem 'active_model_serializers'
+
+gem 'bcrypt'

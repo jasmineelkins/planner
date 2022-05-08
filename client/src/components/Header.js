@@ -3,7 +3,9 @@ import React, { useState } from "react";
 function Header(props) {
   return (
     <>
-      <header className="griditem item1">Task Tracker</header>
+      <header className="">
+        <h1 className="title">Task Tracker</h1>
+      </header>
     </>
   );
 }

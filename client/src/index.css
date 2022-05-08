@@ -233,12 +233,22 @@ input::placeholder {
 
 /* HEADER ----------------------------------------------------------------------------- */
 Header {
-  font-size: 40px;
   color: var(--maroon);
   text-align: center;
   padding: 20px;
   background-color: var(--header);
   margin: 30px;
+}
+
+.title {
+  font-size: 34px;
+}
+
+.loginForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 /* TO DO LIST ----------------------------------------------------------------------------- */

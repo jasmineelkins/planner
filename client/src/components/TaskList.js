@@ -10,6 +10,7 @@ function TaskList({
   notes,
   completedDate,
   setSelectedTask,
+  user,
 }) {
   function deleteTaskFromList(taskID) {
     const updatedListToDisplay = taskList.filter((task) => task.id !== taskID);

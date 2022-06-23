@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import Header from "./components/Header";
 import TaskListContainer from "./components/TaskListContainer";
@@ -24,6 +25,9 @@ function App() {
   );
   const [selectedTask, setSelectedTask] = useState({});
   const [user, setUser] = useState(null);
+  const [errors, setErrors] = useState();
+
+  // const navigate = useNavigate();
 
   useEffect(() => {
     // auto-login
@@ -37,7 +41,17 @@ function App() {
 
       console.log("Current user: ", currentUserObj);
       if (currentUserObj.username) {
+        // navigate("/");
         setUser(currentUserObj);
+        setErrors(null);
+      } else {
+        if (currentUserObj.errors) {
+          setErrors(currentUserObj.errors);
+        } else {
+          setErrors(null);
+        }
+
+        setUser(null);
       }
     } catch (error) {
       console.log("ERROR:, ", error.message);
@@ -65,6 +79,7 @@ function App() {
                           setCompletedTasks={setCompletedTasks}
                           selectedTask={selectedTask}
                           setSelectedTask={setSelectedTask}
+                          user={user}
                         />
                         <Notes selectedTask={selectedTask} />
                       </div>

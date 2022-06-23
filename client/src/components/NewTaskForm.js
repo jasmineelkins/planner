@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BASE_URL from "../Config";
 
 const defaultFormState = {
   description: "",
@@ -6,7 +7,7 @@ const defaultFormState = {
   completed: "false",
 };
 
-function NewTaskForm({ taskList, setTaskList }) {
+function NewTaskForm({ taskList, setTaskList, user }) {
   const [formState, setFormState] = useState(defaultFormState);
   const { description, priority } = formState;
 
@@ -25,31 +26,37 @@ function NewTaskForm({ taskList, setTaskList }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    fetch(`/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:4000",
-      },
-      body: JSON.stringify({
-        description: description,
-        priority: priority,
-        completed: false,
-        date_completed: "",
-        date_added: "",
-      }),
-    })
-      .then((res) => res.json())
-      .then((newTaskObj) => {
-        addNewTaskToList(newTaskObj);
-        console.log("New task object:", newTaskObj);
-      })
-      // .then((newTaskObj) => console.log("New task object:", newTaskObj))
-      .catch((error) => console.log("Error:", error.message));
+    createNewTask();
 
     setFormState(defaultFormState);
+  }
+
+  async function createNewTask() {
+    console.log(user);
+    try {
+      const response = await fetch(`${BASE_URL}/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:4000",
+        },
+        body: JSON.stringify({
+          description: description,
+          priority: priority,
+          completed: false,
+          date_completed: "",
+          date_added: "",
+          user_id: user.id,
+        }),
+      });
+      const newTaskObj = await response.json();
+
+      console.log("New Task: ", newTaskObj);
+      addNewTaskToList(newTaskObj);
+    } catch (error) {
+      console.log("ERROR: ", error.message);
+    }
   }
 
   return (

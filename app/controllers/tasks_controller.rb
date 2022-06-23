@@ -3,8 +3,12 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    tasks = Task.all
-    render json: tasks
+    if params[:user_id] = session[:user_id]
+      tasks = Task.where(user_id: params[:user_id])
+      render json: tasks
+    else
+      render json: { message: 'Not authorized' }
+    end
   end
 
   # GET /tasks/:id
@@ -42,6 +46,7 @@ class TasksController < ApplicationController
       :date_completed,
       :completed,
       :priority,
+      :user_id,
     )
   end
 

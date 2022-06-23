@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       constraints: ->(request) { !request.xhr? && request.format.html? }
 
   # for user login & auth
-  get './me', to: 'users#show'
+  get '/me', to: 'users#show'
   post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

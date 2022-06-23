@@ -15,29 +15,39 @@ import SignUp from "./components/Signup";
 import Login from "./components/Login";
 import NavBar from "./components/NavBar";
 
+import BASE_URL from "./Config";
+
 function App() {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [completedDate, setCompletedDate] = useState(
     new Date().toISOString().slice(0, 9)
   );
   const [selectedTask, setSelectedTask] = useState({});
-
-  //
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     // auto-login
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
+    getCurrentUser();
   }, []);
+
+  async function getCurrentUser() {
+    try {
+      const response = await fetch(`${BASE_URL}/me`);
+      const currentUserObj = await response.json();
+
+      console.log("Current user: ", currentUserObj);
+      if (currentUserObj.username) {
+        setUser(currentUserObj);
+      }
+    } catch (error) {
+      console.log("ERROR:, ", error.message);
+    }
+  }
 
   return (
     <div className="pageContainer">
       <div className="contentWrap">
-        <Header />
+        <Header user={user} />
 
         <BrowserRouter>
           <NavBar user={user} setUser={setUser} />

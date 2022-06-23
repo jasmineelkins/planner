@@ -240,12 +240,47 @@ Header {
   margin: 30px;
 }
 
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerIcon {
+  color: var(--maroon);
+}
+
 .title {
   font-size: 34px;
 }
 
-.loginForm {
+.authFormContainer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.authFormContainer h1 {
+  text-align: center;
+  margin: 10px;
+}
+
+.authFormContainer .btn {
+  margin-top: 15px;
+}
+
+.formRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 250px;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 5px;

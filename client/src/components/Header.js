@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GoThreeBars } from "react-icons/go";
+import Menu from "./Menu";
 
 function Header({ user }) {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -17,6 +18,7 @@ function Header({ user }) {
       <span className="headerIcon" onClick={() => toggleMenu()}>
         <GoThreeBars />
       </span>
+      <Menu />
     </header>
   );
 }

@@ -286,6 +286,24 @@ Header {
   gap: 5px;
 }
 
+/* MENU ----------------------------------------------------------------------------------- */
+.menuContainer {
+  background: peachpuff;
+  position: absolute;
+  right: 50px;
+  top: 80px;
+  padding: 2em;
+}
+
+.menuContainer.hidden {
+  display: none;
+  pointer-events: none;
+}
+
+.menuContainer ul li {
+  list-style-type: none;
+}
+
 /* TO DO LIST ----------------------------------------------------------------------------- */
 .taskListContainerContainer {
   background-color: rgba(211, 165, 157, 0.7);

@@ -14,7 +14,7 @@ import Footer from "./components/Footer";
 
 import SignUp from "./components/Signup";
 import Login from "./components/Login";
-import NavBar from "./components/NavBar";
+import AuthBar from "./components/AuthBar";
 
 import BASE_URL from "./Config";
 
@@ -61,10 +61,8 @@ function App() {
   return (
     <div className="pageContainer">
       <div className="contentWrap">
-        <Header user={user} />
-
         <BrowserRouter>
-          <NavBar user={user} setUser={setUser} />
+          <Header user={user} setUser={setUser} />
           <Routes>
             <>
               {user ? (

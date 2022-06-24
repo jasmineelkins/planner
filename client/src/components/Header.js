@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GoThreeBars } from "react-icons/go";
 import Menu from "./Menu";
 
-function Header({ user }) {
+function Header({ user, setUser }) {
   const [menuVisible, setMenuVisible] = useState(false);
+
+  useEffect(() => {
+    setMenuVisible(false);
+  }, []);
 
   function toggleMenu() {
     setMenuVisible(!menuVisible);
@@ -16,9 +20,9 @@ function Header({ user }) {
       {user ? <span>Hi, {user.username}</span> : null}
       <h1 className="title">Task Tracker</h1>
       <span className="headerIcon" onClick={() => toggleMenu()}>
-        <GoThreeBars />
+        <GoThreeBars className="menuIcon" />
       </span>
-      <Menu />
+      <Menu menuVisible={menuVisible} user={user} setUser={setUser} />
     </header>
   );
 }

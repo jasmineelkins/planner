@@ -3,8 +3,13 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
+  resources :tasks do
+    resources :notes
+  end
+
   resources :notes
-  resources :tasks
+
+  delete '/reset/:task_id', to: 'notes#reset_task_notes'
 
   # Defines the root path route ("/")
   # root "articles#index"

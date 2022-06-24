@@ -3,7 +3,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    notes = Note.all
+    notes = Note.where(task_id: params[:task_id])
     render json: notes
   end
 
@@ -31,6 +31,12 @@ class NotesController < ApplicationController
     note = find_note
     note.destroy
     render json: {}
+  end
+
+  # DELETE all notes
+  def reset_task_notes
+    task_notes = Note.where(task_id: params[:task_id])
+    task_notes.destroy_all
   end
 
   private

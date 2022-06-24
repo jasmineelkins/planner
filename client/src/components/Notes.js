@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import RouteButton from "./RouteButton";
-import Note from "./Note";
+import BASE_URL from "../Config";
+// import Note from "./Note";
 
 function Notes({ selectedTask }) {
   const [formInput, setFormInput] = useState("");
+  const [notesList, setNotesList] = useState([
+    { content: "click a task to view/add notes", id: "0" },
+  ]);
+
+  useEffect(() => {
+    getTaskNotes();
+  }, [selectedTask]);
 
   function handleFormChange(e) {
     setFormInput(e.target.value);
@@ -11,54 +19,78 @@ function Notes({ selectedTask }) {
 
   function handleAddNote(e) {
     e.preventDefault();
-
     console.log(formInput);
 
-    //  POST form to Note content, linked to task_id of clicked task
-    fetch(`/notes/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        content: formInput,
-        task_id: selectedTask.id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error.message));
-
+    createNewNote();
     setFormInput("");
+  }
+
+  async function getTaskNotes() {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/tasks/${selectedTask.id}/notes`
+      );
+      const taskNotes = await response.json();
+
+      console.log("Selected task's notes: ", taskNotes);
+      setNotesList(taskNotes);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async function createNewNote() {
+    try {
+      const response = await fetch(`${BASE_URL}/notes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: formInput,
+          task_id: selectedTask.id,
+        }),
+      });
+      const noteObj = await response.json();
+
+      console.log("noteObj: ", noteObj);
+      setNotesList([...notesList, noteObj]);
+    } catch (error) {
+      console.log("ERROR: ", error.message);
+    }
   }
 
   function handleResetNotes(e) {
     e.preventDefault();
 
-    // DELETE all notes for that task_id from database
+    // DELETE all notes for that task_id
+    resetTaskNotes();
 
     setFormInput("");
   }
 
-  // Does not re render automatically yet:
-  let notesToDisplay = <li></li>;
+  async function resetTaskNotes() {
+    try {
+      const response = await fetch(`${BASE_URL}/reset/${selectedTask.id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
 
-  if (selectedTask) {
-    if (selectedTask.notes === undefined) {
-      notesToDisplay = (
-        <li className="defaultNote">click a task to view/add notes</li>
-      );
-    } else if (selectedTask.notes === []) {
-      console.log("### notes array is empty", selectedTask.notes);
-      notesToDisplay = <li>empty array - no notes saved for this task</li>;
-    } else if (selectedTask.notes) {
-      console.log("### there are task notes!", selectedTask.notes);
-      notesToDisplay = selectedTask.notes.map((note) => (
-        <li key={note.id}>{note.content}</li>
-      ));
+      console.log("IS THIS WORKING?");
+
+      // then reset notesToDisplay- like this?
+      getTaskNotes();
+
+      // OR this?
+      setNotesList([]);
+    } catch (error) {
+      console.log(error.message);
     }
   }
+
+  const notesToDisplay = notesList.map((note) => (
+    <li key={note.id}>{note.content}</li>
+  ));
 
   return (
     <div className="notesContainer griditem item4">
@@ -92,15 +124,11 @@ function Notes({ selectedTask }) {
         </h4>
 
         <div className="notesOutputContainer">
-          <ul>{notesToDisplay}</ul>
-
-          {/* <ul>
-            {notesDisplay.notes
-              ? notesDisplay.notes.map((note, index) => (
-                  <li key={index}>{note}</li>
-                ))
-              : null}
-          </ul> */}
+          {selectedTask.id ? (
+            <ul>{notesToDisplay}</ul>
+          ) : (
+            <span className="defaultNote">click a task to view/add notes</span>
+          )}
         </div>
       </div>
     </div>

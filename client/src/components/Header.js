@@ -7,7 +7,7 @@ function Header({ user }) {
 
   function toggleMenu() {
     setMenuVisible(!menuVisible);
-    console.log("clicked");
+    // console.log("clicked");
     console.log(menuVisible);
   }
 

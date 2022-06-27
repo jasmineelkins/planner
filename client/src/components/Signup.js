@@ -9,6 +9,8 @@ function SignUp({ setUser }) {
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
 
+  const errorsToDisplay = errors === null ? null : errors;
+
   function handleSubmit(e) {
     e.preventDefault();
     createUser();
@@ -89,6 +91,8 @@ function SignUp({ setUser }) {
         <button type="submit" className="btn">
           Sign Up
         </button>
+
+        <span className="errorSpan">{errorsToDisplay}</span>
       </form>
     </div>
   );

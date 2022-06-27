@@ -74,6 +74,8 @@ function Login({ setUser }) {
         <button type="submit" className="btn">
           Login
         </button>
+
+        <span className="errorSpan">{errorsToDisplay}</span>
       </form>
     </div>
   );

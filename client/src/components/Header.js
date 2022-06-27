@@ -13,6 +13,7 @@ function Header({ user, setUser }) {
     setMenuVisible(!menuVisible);
     // console.log("clicked");
     console.log(menuVisible);
+    // setTimeout(() => setMenuVisible(false), 1000);
   }
 
   return (
@@ -22,7 +23,12 @@ function Header({ user, setUser }) {
       <span className="headerIcon" onClick={() => toggleMenu()}>
         <GoThreeBars className="menuIcon" />
       </span>
-      <Menu menuVisible={menuVisible} user={user} setUser={setUser} />
+      <Menu
+        menuVisible={menuVisible}
+        setMenuVisible={setMenuVisible}
+        user={user}
+        setUser={setUser}
+      />
     </header>
   );
 }

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import BASE_URL from "../Config";
 
-function Menu({ menuVisible, user, setUser }) {
+function Menu({ menuVisible, setMenuVisible, user, setUser }) {
   const show = menuVisible === true ? "menuContainer" : "menuContainer hidden";
+  const navigate = useNavigate();
 
   async function deleteUserSession() {
     try {
@@ -12,10 +13,16 @@ function Menu({ menuVisible, user, setUser }) {
       });
       if (response.ok) {
         setUser(null);
+        setMenuVisible(false);
+        navigate("/");
       }
     } catch (error) {
       console.log("ERROR: ", error.message);
     }
+  }
+
+  function hideMenu() {
+    setMenuVisible(false);
   }
   return (
     <div className={show}>
@@ -28,15 +35,15 @@ function Menu({ menuVisible, user, setUser }) {
         </ul>
       ) : (
         <ul>
-          <li>
+          <li onClick={hideMenu}>
             {" "}
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li onClick={hideMenu}>
             {" "}
             <Link to="/signup">Signup</Link>
           </li>
-          <li>
+          <li onClick={hideMenu}>
             {" "}
             <Link to="/login">Login</Link>
           </li>

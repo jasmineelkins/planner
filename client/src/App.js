@@ -83,7 +83,6 @@ function App() {
                       </div>
 
                       <div className="rightColumn rightGridItem">
-                        <DailyQuote />
                         <CalendarComponent
                           setCompletedDate={setCompletedDate}
                           completedDate={completedDate}
@@ -122,7 +121,6 @@ function App() {
                         </div>
 
                         <div className="rightColumn rightGridItem">
-                          <DailyQuote />
                           <CalendarComponent
                             setCompletedDate={setCompletedDate}
                             completedDate={completedDate}
